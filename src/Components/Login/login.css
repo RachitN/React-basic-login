@@ -1,0 +1,30 @@
+.formDiv{
+width: 400px;
+display: flex;
+flex-direction: column;
+border: 5px blue solid;
+justify-content: center;
+align-items: center;
+padding: 2px;
+}
+
+.formDiv div{
+    border: 2px black dotted;
+    width: 300px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+.formDiv button{
+    margin-top: 4px;
+    font-size: medium;
+    width: 75px;
+}
+.valid{
+    background-color: darkcyan;
+}
+
+.notValid {
+        background-color: grey;
+}
