@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './login.css'
 const Login = (props) => {
-    const emailInput = useRef();
-    const passwordInput = useRef();
+    const [emailInput,setEmailInput] = useState('');
+    const [passwordInput,setPasswordInput] = useState('');
     const login = event=>{
         event.preventDefault()
         if(valid)
@@ -13,7 +13,7 @@ const Login = (props) => {
         // checKValid()
     }
     const checkValid = ()=>{
-        if(emailInput.current.value.trim().length!=0 && emailInput.current.value.includes('@') && passwordInput.current.value.length>6)
+        if(emailInput.trim().length!=0 && emailInput.includes('@') && passwordInput.length>6)
         {
             validFunction(true)
         }
@@ -23,19 +23,28 @@ const Login = (props) => {
         }
     }
 
+    const setEmailInputHandler = event=>{
+        setEmailInput(event.target.value);
+    }
+    const setPasswordInputHandler = event=>{
+        setPasswordInput(event.target.value);
+    }
+
+    useEffect(checkValid,[emailInput,passwordInput])
+
     const [valid,validFunction] = useState(false)
 
   return (
     <>
-      <form onSubmit={login} onChange={checkValid}>
+      <form onSubmit={login} >
         <div className="formDiv" >
           <div>
             <label>Email</label>
-            <input type="email" ref={emailInput}></input>
+            <input type="email" value={emailInput} onChange = {setEmailInputHandler}></input>
           </div>
           <div>
             <label>Password</label>
-            <input type="password" ref={passwordInput}></input>
+            <input type="password" value={passwordInput} onChange={setPasswordInputHandler}></input>
           </div>
           <button className={valid?'valid':'notValid'} type='submit'>Login</button>
         </div>
